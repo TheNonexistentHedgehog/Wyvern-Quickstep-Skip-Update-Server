@@ -1,0 +1,21 @@
+{
+  "Groups": [
+    {
+      "Name": "Config",
+      "DisplayName": "",
+      "Elements": [
+        {
+          "Name": "trial_only",
+          "DisplayName": "Trial Only",
+          "Description": [
+            "Makes it only skip the quickstep section in the Master King Koco trial."
+          ],
+          "Type": "bool",
+          "DefaultValue": false
+        }
+      ]
+    }
+],
+
+"IniFile": "config.ini"
+}

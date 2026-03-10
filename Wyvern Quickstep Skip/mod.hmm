@@ -1,0 +1,42 @@
+Code "Wyvern QuickStep Skip" by "TheNonexistentHedgehog"
+//
+    #include "BlackboardStatus" noemit
+    #lib "Reflection"
+    #lib "Player"
+    #lib "Memory"
+    #lib "GameMode"
+    #lib "INI"
+
+    #import "GOComponents"
+
+    static bool can_teleport = false;
+    static bool trial_only = false;
+//
+{
+    trial_only = INI.Parse<bool>(INI.Read(System.IO.Path.Combine(HMM.FindModsByName("Wyvern Quickstep Skip")[0].Path, "config.ini"))["Config"]["trial_only"], trial_only);
+    if (trial_only && GameMode.GetName() != "GameModeBossRush") return;
+
+    var pkinematics = Player.Kinematics.Get();
+    
+    if (pkinematics != null) {
+        if (IS_WORLD_FLAG(IsBattle) 
+        && pkinematics->Position.X >= 753.0f && pkinematics->Position.X <= 773.0f 
+        && pkinematics->Position.Y >= 403.0f && pkinematics->Position.Y <= 423.0f 
+        && pkinematics->Position.Z >= -297.0f && pkinematics->Position.Z <= -277.0f
+        ) {
+            can_teleport = true;
+        }
+        
+        if (can_teleport && Player.Status.IsGrounded() && !IS_WORLD_FLAG(IsAutoRun)) {
+            can_teleport = false;
+        }
+        if (can_teleport && Player.Status.IsGrounded() && IS_WORLD_FLAG(IsAutoRun) && IS_WORLD_FLAG(IsBattle)) {
+            can_teleport = false;
+            var StateID = Player.State.GetCurrentStateID<Sonic.StateID>();
+            pkinematics->Position = new System.Numerics.Vector3(646.7344f, 356.5024f + 2.75f, 80.08313f);
+            pkinematics->Rotation = new System.Numerics.Quaternion(-0.214278f, 0.8f, 0.035065f, 0.394746f);
+        }
+    } else {
+        can_teleport = false;
+    }
+}
