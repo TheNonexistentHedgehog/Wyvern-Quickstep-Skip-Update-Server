@@ -33,10 +33,11 @@ Code "Wyvern QuickStep Skip" by "TheNonexistentHedgehog"
         if (can_teleport && Player.Status.IsGrounded() && IS_WORLD_FLAG(IsAutoRun) && IS_WORLD_FLAG(IsBattle)) {
             can_teleport = false;
             var StateID = Player.State.GetCurrentStateID<Sonic.StateID>();
-            pkinematics->Position = new System.Numerics.Vector3(646.7344f, 356.5024f + 2.75f, 80.08313f);
+            pkinematics->Position = new System.Numerics.Vector3(646.7344f, 356.5024f, 80.08313f);
             pkinematics->Rotation = new System.Numerics.Quaternion(-0.214278f, 0.8f, 0.035065f, 0.394746f);
         }
     } else {
         can_teleport = false;
     }
+
 }
